@@ -1,3 +1,5 @@
+import { usersData } from './main.js';
+
 export function createNavbar() {
 
     const navbar = document.createElement('nav');
@@ -18,6 +20,7 @@ export function createFilterOptions() {
 
     const select = document.createElement('select');
     select.className = 'custom-select w-auto';
+    select.setAttribute('id', 'dropdown-menu');
     ['Name', 'Username', 'Email'].forEach(optionText => {
         const option = document.createElement('option');
         option.value = optionText.toLowerCase();
@@ -28,19 +31,16 @@ export function createFilterOptions() {
     const input = document.createElement('input');
     input.type = 'text';
     input.className = 'form-control mt-2 text-center w-50 mx-auto';
+    input.setAttribute('id', 'search-input');
     input.placeholder = 'Enter search text';
-
-    input.addEventListener('input', () => {
-        filterTable(select.value, input.value);
-    });
 
     filterContainer.appendChild(select);
     filterContainer.appendChild(input);
     document.getElementById('filter-container').appendChild(filterContainer);
-}
+};
 
 export function createTable(users) {
-    const container = document.getElementById('table-container');
+    let container = document.getElementById('table-container');
 
     const table = document.createElement('table');
     table.className = 'table table-striped bg-dark text-white mt-5 text-center';
